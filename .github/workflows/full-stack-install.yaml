@@ -33,18 +33,18 @@ jobs:
         perses-version:
           - 0.10.1
         openmm-version:
-          - 7.7.0
+          - 8.2.0
         openmmtools-version:
-          - 0.21.5
+          - 0.24.4
 
     steps:
       - uses: actions/checkout@v3
 
-      - name: Setup conda env
-        uses: mamba-org/provision-with-micromamba@main
+      - name: Setup micromamba env
+        uses: mamba-org/setup-micromamba@v2
         with:
           cache-downloads: true
-          environment-file: false
+          cache-environment: false
 
       - name: Install perses
-        run:  conda install -c jaimergp/label/unsupported-cudatoolkit-shim -c conda-forge perses=${{ matrix.perses-version }} python=${{ matrix.python-version }} openmm=${{ matrix.openmm-version }} openmmtools=${{ matrix.openmmtools-version }}
+        run:  micromamba install -c jaimergp/label/unsupported-cudatoolkit-shim -c conda-forge perses=${{ matrix.perses-version }} python=${{ matrix.python-version }} openmm=${{ matrix.openmm-version }} openmmtools=${{ matrix.openmmtools-version }}
